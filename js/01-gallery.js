@@ -26,17 +26,33 @@ function createGalleryItemsCollection(galleryItems) {
 
 galleryContainer.addEventListener('click', onGalleryItemClick);
 
-
+let instance = '';
 
 function onGalleryItemClick(event) {
     event.preventDefault();
     
-    basicLightbox.create(`
+    if(event.target.className !== "gallery__image") {
+        return;
+    }
+    
+    instance = basicLightbox.create(`
     <div class="modal">
         <img src="${event.target.dataset.source}">
     </div>
-`).show();
+    `);
+    instance.show();
+    
+    window.addEventListener('keydown', closeModalOnEsc);
+
+    function closeModalOnEsc(event) {
+        if (event.code === "Escape") {
+        instance.close();
+        };
+    };
 };
+
+
+
 
 
 
