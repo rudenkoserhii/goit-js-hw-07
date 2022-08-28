@@ -1,6 +1,8 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
+
+
 const galleryContainer = document.querySelector(".gallery");
 const galleryItemsCollection = createGalleryItemsCollection(galleryItems);
 
@@ -22,5 +24,19 @@ function createGalleryItemsCollection(galleryItems) {
 
 };
 
+galleryContainer.addEventListener('click', onGalleryItemClick);
 
-console.log(createGalleryItemsCollection(galleryItems));
+
+
+function onGalleryItemClick(event) {
+    event.preventDefault();
+    
+    basicLightbox.create(`
+    <div class="modal">
+        <img src="${event.target.dataset.source}">
+    </div>
+`).show();
+};
+
+
+
